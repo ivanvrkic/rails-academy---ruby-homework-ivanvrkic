@@ -2,6 +2,9 @@
 #    incremented by one.
 
 class Integer
+  def increment
+    self + 1
+  end
 end
 
 # 2. Open String class and add instance method `Integer#ascii_sum` which sums ASCII codes for each
@@ -17,10 +20,16 @@ end
 #   hint: `String#ord`
 
 class String
+  def ascii_sum
+    split('').inject(0) { |sum, char| sum + char.ord }
+  end
 end
 
 # 3. Open Array class and add instance method `Array#second` which returns the second element of an
 #    array.
 
 class Array
+  def second
+    drop(1).first
+  end
 end

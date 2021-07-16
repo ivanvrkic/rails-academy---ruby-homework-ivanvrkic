@@ -39,8 +39,28 @@
 #     items: [Item.new(weight: 50, quantity: 2), Item.new(weight: 100, quantity: 3)]
 #  )
 
+require 'pry'
+
 class Item
+  def initialize(weight:, quantity: 1)
+    @weight = weight
+    @quantity = quantity
+  end
+
+  def total_weight
+    @weight * @quantity
+  end
 end
 
-class Box
+class Box < Item
+  def initialize(weight:, items:)
+    super(weight: weight)
+    @items = items
+  end
+
+  def total_weight
+    items_weight = 0
+    @items.each { |item| items_weight += item.total_weight }
+    @weight + items_weight
+  end
 end
