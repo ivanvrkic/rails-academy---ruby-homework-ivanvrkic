@@ -40,7 +40,7 @@ class Character
   end
 
   def vowel?
-    @char.match?(/[aeiou]/)
+    match?(/[aeiou]/)
   end
 end
 
