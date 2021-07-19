@@ -22,7 +22,7 @@ end
 
 def check_diag2(board)
   (0..2).each_with_object(Hash.new(0)) do |i, m|
-    m[board[i][2 - i]] += 1 unless board[i][2 - i].nil?
+    m[board[i][2 - i]] += 1 if board[i][2 - i]
   end
 end
 
