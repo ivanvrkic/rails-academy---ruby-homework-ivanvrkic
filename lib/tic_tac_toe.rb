@@ -16,7 +16,7 @@
 
 def check_diag1(board)
   (0..2).to_a.each_with_object(Hash.new(0)) do |i, m|
-    m[board[i][i]] += 1 unless board[i][i].nil?
+    m[board[i][i]] += 1 if board[i][i]
   end
 end
 
