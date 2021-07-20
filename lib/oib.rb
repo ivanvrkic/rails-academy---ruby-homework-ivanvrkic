@@ -15,33 +15,31 @@
 #   https://regos.hr/app/uploads/2018/07/KONTROLA-OIB-a.pdf
 require 'pry'
 
-def calc_control_char(oib)
-  control_char = 10
-  oib.each do |digit|
-    control_char += digit
-    control_char %= 10
-    control_char = 10 if control_char.zero?
-    control_char *= 2
-    control_char %= 11
+def calculate_control_char
+  calculated_control_char = oib.inject(10) do |control_char_sum, digit|
+    control_char_sum += digit
+    control_char_sum %= 10
+    control_char_sum = 10 if control_char_sum.zero?
+    control_char_sum *= 2
+    control_char_sum % 11
   end
-  11 - control_char
+  (11 - calculated_control_char) % 10
 end
 
 class Oib
+  attr_reader :oib, :control_char
+
   def initialize(oib)
     raise ArgumentError, 'Code is too short' if oib.length < 11
     raise ArgumentError, 'Code is too long' if oib.length > 11
     raise ArgumentError, 'Code should contain only digits' if oib.scan(/\D/).count.positive?
 
-    @oib = oib
+    @oib = oib.split('').map(&:to_i)
+    @control_char = @oib.pop
   end
 
   def valid?
-    oib = @oib.split('').map(&:to_i)
-    last_char = oib.pop
-    control_char = calc_control_char(oib)
-    control_char %= 10
-    control_char == last_char
+    calculate_control_char == control_char
   end
 end
 

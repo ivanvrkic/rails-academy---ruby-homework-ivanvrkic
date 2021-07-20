@@ -42,25 +42,27 @@
 require 'pry'
 
 class Item
+  attr_reader :weight, :quantity
+
   def initialize(weight:, quantity: 1)
     @weight = weight
     @quantity = quantity
   end
 
   def total_weight
-    @weight * @quantity
+    weight * quantity
   end
 end
 
 class Box < Item
+  attr_reader :items
+
   def initialize(weight:, items:)
     super(weight: weight)
     @items = items
   end
 
   def total_weight
-    items_weight = 0
-    @items.each { |item| items_weight += item.total_weight }
-    @weight + items_weight
+    weight + items.sum(&:total_weight)
   end
 end

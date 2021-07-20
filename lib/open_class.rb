@@ -21,7 +21,7 @@ end
 
 class String
   def ascii_sum
-    split('').inject(0) { |sum, char| sum + char.ord }
+    chars.sum(&:ord)
   end
 end
 

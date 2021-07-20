@@ -37,7 +37,7 @@ def nato_phonetic_alphabet # rubocop:disable Metrics/MethodLength
 end
 
 def spell(word)
-  word.downcase.split('').map { |char| nato_phonetic_alphabet[char] }.join(' ')
+  word.downcase.chars.map { |char| nato_phonetic_alphabet[char] }.join(' ')
 end
 
 # puts spell('mouse')

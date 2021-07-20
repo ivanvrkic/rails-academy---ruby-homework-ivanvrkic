@@ -13,35 +13,31 @@
 #  X | O |        ['X', 'O', nil] ]
 #
 #  winner is 'X'
-
 def check_diag1(board)
   (0..2).to_a.each_with_object(Hash.new(0)) do |i, m|
-    m[board[i][i]] += 1 unless board[i][i].nil?
+    m[board[i][i]] += 1 if board[i][i]
   end
 end
 
 def check_diag2(board)
   (0..2).each_with_object(Hash.new(0)) do |i, m|
-    m[board[i][2 - i]] += 1 unless board[i][2 - i].nil?
+    m[board[i][2 - i]] += 1 if board[i][2 - i]
   end
 end
 
 def check_row(board)
-  board.each { |row| return row.compact[0] if row.compact.tally.max.last == 3 }
-  nil
+  win = board.find { |row| row.compact.tally.max.last == 3 }
+  return win.first if win
 end
 
 def check_column(board)
-  board.transpose.each { |row| return row.compact[0] if row.compact.tally.max.last == 3 }
-  nil
+  win = board.transpose.find { |row| row.compact.tally.max.last == 3 }
+  return win.first if win
 end
 
 def tic_tac_toe(board)
-  row = check_row(board)
-  return row unless row.nil?
-
-  column = check_column(board)
-  return column unless column.nil?
+  win = check_row(board) || check_column(board)
+  return win if win
 
   diag1 = check_diag1(board)
   return diag1.max.first if diag1.max.last == 3
@@ -51,7 +47,3 @@ def tic_tac_toe(board)
 
   'D'
 end
-
-# puts tic_tac_toe([['O', nil, 'X'],
-# ['O', 'X', 'O'],
-# ['O', 'X', 'O']])

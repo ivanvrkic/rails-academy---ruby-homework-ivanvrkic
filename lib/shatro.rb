@@ -23,37 +23,42 @@
 #   - create a Character class which knows if a character is a vowel or not
 
 class Word
+  attr_reader :word
+
   def initialize(word)
     @word = word
   end
 
   def shatro
-    return @word if @word.length < 3
+    return word if @word.length < 3
 
-    @word.split(/(?<=[aeiou])/).rotate(1).join('')
+    word.split(/(?<=[aeiou])/).rotate(1).join('')
   end
 end
 
 class Character
+  attr_reader :char
+
   def initialize(char)
     @char = char
   end
 
   def vowel?
-    @char.match?(/[aeiou]/)
+    char.match?(/[aeiou]/)
   end
 end
 
 class Solution
   attr_accessor :sentence
 
-  def initialize
-    @sentence = gets
+  def initialize(sentence)
+    @sentence = sentence if sentence
+    @sentence = gets if sentence.nil?
   end
 end
 
 def shatro(sentence)
-  sentence.split(' ').map { |w| Word.new(w).shatro }.join(' ')
+  Solution.new(sentence).sentence.split(' ').map { |w| Word.new(w).shatro }.join(' ')
 end
 
 # puts Word.new('zdravo').shatro
