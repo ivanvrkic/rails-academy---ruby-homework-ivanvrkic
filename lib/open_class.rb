@@ -30,6 +30,6 @@ end
 
 class Array
   def second
-    drop(1).first
+    self[1]
   end
 end
