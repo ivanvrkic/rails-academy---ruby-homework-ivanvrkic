@@ -14,13 +14,13 @@
 #
 #  winner is 'X'
 def check_diag1(board)
-  (0..2).to_a.each_with_object({}) do |i, m|
+  (0..2).to_a.each_with_object(Hash.new(0)) do |i, m|
     m[board[i][i]] += 1 if board[i][i]
   end
 end
 
 def check_diag2(board)
-  (0..2).each_with_object({}) do |i, m|
+  (0..2).each_with_object(Hash.new(0)) do |i, m|
     m[board[i][2 - i]] += 1 if board[i][2 - i]
   end
 end
