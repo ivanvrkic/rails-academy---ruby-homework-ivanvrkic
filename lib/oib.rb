@@ -42,5 +42,3 @@ class Oib
     calculate_control_char == control_char
   end
 end
-
-# puts Oib.new('69435151530').valid?

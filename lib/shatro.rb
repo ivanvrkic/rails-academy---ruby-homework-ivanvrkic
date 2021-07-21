@@ -60,9 +60,3 @@ end
 def shatro(sentence)
   Solution.new(sentence).sentence.split(' ').map { |w| Word.new(w).shatro }.join(' ')
 end
-
-# puts Word.new('zdravo').shatro
-
-# puts Character.new('a').vowel?
-
-# puts shatro(Solution.new.sentence)

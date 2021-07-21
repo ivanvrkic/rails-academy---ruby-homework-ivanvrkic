@@ -12,5 +12,3 @@ require 'pry'
 def election_winner(votes)
   votes.tally.max_by(&:last).first
 end
-
-# puts election_winner(['Harry', 'Anna', 'Paula', 'Anna'])

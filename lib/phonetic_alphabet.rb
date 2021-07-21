@@ -39,5 +39,3 @@ end
 def spell(word)
   word.downcase.chars.map { |char| nato_phonetic_alphabet[char] }.join(' ')
 end
-
-# puts spell('mouse')

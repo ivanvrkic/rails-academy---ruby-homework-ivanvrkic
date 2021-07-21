@@ -19,5 +19,3 @@ def holes(number)
                        9 => 1 }
   number.digits.inject(0) { |sum, digit| sum + holes_per_number[digit] }
 end
-
-# puts holes(7)
