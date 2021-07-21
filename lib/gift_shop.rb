@@ -39,8 +39,30 @@
 #     items: [Item.new(weight: 50, quantity: 2), Item.new(weight: 100, quantity: 3)]
 #  )
 
+require 'pry'
+
 class Item
+  attr_reader :weight, :quantity
+
+  def initialize(weight:, quantity: 1)
+    @weight = weight
+    @quantity = quantity
+  end
+
+  def total_weight
+    weight * quantity
+  end
 end
 
-class Box
+class Box < Item
+  attr_reader :items
+
+  def initialize(weight:, items:)
+    super(weight: weight)
+    @items = items
+  end
+
+  def total_weight
+    weight + items.sum(&:total_weight)
+  end
 end

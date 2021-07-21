@@ -8,4 +8,7 @@
 # if votes are ['Paula', 'Zach', 'Albert', 'Zach', 'Paula', 'Albert', 'Albert', 'Zach']
 # winner is 'Zach'
 
-def election_winner(votes); end
+require 'pry'
+def election_winner(votes)
+  votes.tally.max_by(&:last).first
+end

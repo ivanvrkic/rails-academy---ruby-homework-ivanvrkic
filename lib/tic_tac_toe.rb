@@ -14,4 +14,37 @@
 #
 #  winner is 'X'
 
-def tic_tac_toe(board); end
+def check_diag1(board)
+  (0..2).to_a.each_with_object(Hash.new(0)) do |i, m|
+    m[board[i][i]] += 1 if board[i][i]
+  end
+end
+
+def check_diag2(board)
+  (0..2).each_with_object(Hash.new(0)) do |i, m|
+    m[board[i][2 - i]] += 1 if board[i][2 - i]
+  end
+end
+
+def check_row(board)
+  win = board.find { |row| row.compact.tally.max.last == 3 }
+  return win.first if win
+end
+
+def check_column(board)
+  win = board.transpose.find { |row| row.compact.tally.max.last == 3 }
+  return win.first if win
+end
+
+def tic_tac_toe(board)
+  win = check_row(board) || check_column(board)
+  return win if win
+
+  diag1 = check_diag1(board)
+  return diag1.max.first if diag1.max.last == 3
+
+  diag2 = check_diag2(board)
+  return diag2.max.first if diag2.max.last == 3
+
+  'D'
+end

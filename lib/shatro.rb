@@ -22,4 +22,41 @@
 #   - create a Word class which accepts only 1 word and knows how to convert it to shatro
 #   - create a Character class which knows if a character is a vowel or not
 
-def shatro(sentence); end
+class Word
+  attr_reader :word
+
+  def initialize(word)
+    @word = word
+  end
+
+  def shatro
+    return word if @word.length < 3
+
+    word.split(/(?<=[aeiou])/).rotate(1).join('')
+  end
+end
+
+class Character
+  attr_reader :char
+
+  def initialize(char)
+    @char = char
+  end
+
+  def vowel?
+    char.match?(/[aeiou]/)
+  end
+end
+
+class Solution
+  attr_accessor :sentence
+
+  def initialize(sentence)
+    @sentence = sentence if sentence
+    @sentence = gets if sentence.nil?
+  end
+end
+
+def shatro(sentence)
+  Solution.new(sentence).sentence.split(' ').map { |w| Word.new(w).shatro }.join(' ')
+end

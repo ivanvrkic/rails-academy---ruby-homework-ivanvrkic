@@ -36,4 +36,6 @@ def nato_phonetic_alphabet # rubocop:disable Metrics/MethodLength
   }
 end
 
-def spell(word); end
+def spell(word)
+  word.downcase.chars.map { |char| nato_phonetic_alphabet[char] }.join(' ')
+end
